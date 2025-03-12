@@ -112,7 +112,7 @@ Confidence: ${prediction.confidence}%
       <Container className="upload-container">
         <Box className="content-wrapper">
           <Typography variant="h2" className="upload-title">
-            <span className="gradient-text">Chest X-Ray Analysis</span>
+            <span className="gradient-text">HealthTech 4 Africa</span>
           </Typography>
           <Typography variant="subtitle1" className="upload-subtitle">
             Upload or Scan your chest radiograph for AI-powered diagnostic insights

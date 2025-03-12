@@ -32,7 +32,7 @@ const AboutPage = () => {
       
       <Container maxWidth="lg" className="about-container">
         <GradientText variant="h2" align="center" gutterBottom className="main-title">
-          About MediScan AI
+          About HealthTech 4 Africa
         </GradientText>
         
         <StyledPaper elevation={0} className="content-paper">
