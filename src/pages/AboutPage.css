@@ -1,0 +1,137 @@
+.about-page {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #0f0c29, #1a1a2e);
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .shape {
+    position: absolute;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 50%;
+    animation: float 25s infinite linear;
+  }
+  
+  @keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(100vw, -100vh) rotate(360deg); }
+  }
+  
+  .about-container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .main-title {
+    font-weight: 700 !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 3rem !important;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .content-paper {
+    padding: 2.5rem !important;
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(15px) !important;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .section-icon {
+    color: #6c5ce7;
+    background: rgba(108, 92, 231, 0.1);
+    padding: 12px;
+    border-radius: 10px;
+  }
+  
+  .section-title {
+    color: #fff !important;
+    font-weight: 600 !important;
+  }
+  
+  .section-text {
+    color: rgba(255, 255, 255, 0.8) !important;
+    line-height: 1.7 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .condition-grid {
+    margin-top: 1rem;
+  }
+  
+  .condition-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  
+  .check-icon {
+    color: #4ecdc4 !important;
+  }
+  
+  .guide-list {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 1rem !important;
+  }
+  
+  .guide-item {
+    transition: background 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  .guide-item:hover {
+    background: rgba(108, 92, 231, 0.05) !important;
+  }
+  
+  .step-number {
+    background: linear-gradient(45deg, #6c5ce7, #4ecdc4) !important;
+    color: #fff !important;
+    font-weight: 600;
+  }
+  
+  .team-card {
+    padding: 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 15px !important;
+    transition: transform 0.3s ease;
+  }
+  
+  .team-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .member-avatar {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 0 auto 1rem !important;
+    background: linear-gradient(45deg, #6c5ce7, #4ecdc4) !important;
+    font-size: 24px !important;
+  }
+  
+  .contact-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+  }

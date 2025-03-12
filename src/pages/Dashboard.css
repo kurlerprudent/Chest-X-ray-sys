@@ -1,0 +1,211 @@
+.dashboard-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #0f0c29, #1a1a2e);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .particle-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-100vh) translateX(100vw); }
+    50% { transform: translateY(-50vh) translateX(-50vw); }
+    75% { transform: translateY(-75vh) translateX(75vw); }
+    100% { transform: translateY(0) translateX(0); }
+  }
+  
+  .dashboard-container {
+    position: relative;
+    z-index: 1;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 1200px;
+    animation: containerEntrance 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes containerEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .header-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #96f2d7 0%, #6c5ce7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+  }
+  
+  .gradient-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #6c5ce7, transparent);
+  }
+  
+  .stat-card {
+    color: #fff !important;
+    border-radius: 12px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .card-icon {
+    color: #6c5ce7;
+    background: rgba(108, 92, 231, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 28px !important;
+  }
+  
+  .card-title {
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .card-value {
+    font-weight: 700 !important;
+    margin-bottom: 15px !important;
+    position: relative;
+  }
+  
+  .trend {
+    font-size: 1.2rem;
+    margin-left: 8px;
+  }
+  
+  .trend.up {
+    color: #4ecdc4;
+  }
+  
+  .trend.down {
+    color: #ff6b6b;
+  }
+  
+  .accuracy-bar {
+    height: 8px !important;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .accuracy-bar .MuiLinearProgress-bar {
+    background: linear-gradient(90deg, #6c5ce7, #4ecdc4);
+  }
+  
+  .loading-skeleton {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .skeleton-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    height: 200px;
+    animation: skeletonPulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes skeletonPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.3; }
+  }
+  
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    margin: 40px 0;
+  }
+  
+  .chart-container {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  
+  .chart-title {
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .mock-chart {
+    height: 300px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mock-chart::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.02),
+      transparent
+    );
+    animation: chartShine 1.5s infinite;
+  }
+  
+  @keyframes chartShine {
+    to {
+      left: 100%;
+    }
+  }
