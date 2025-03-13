@@ -5,6 +5,7 @@ import UploadPage from './pages/UploadPage';
 import PredictionHistory from './pages/PredictionHistory';
 import DiseaseInfoPage from './pages/DiseaseInfoPage';
 import AboutPage from './pages/AboutPage';
+
 import MyThemeProvider from './MyThemeProvider';
 
 function App() {

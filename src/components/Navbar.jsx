@@ -38,6 +38,8 @@ const Navbar = () => {
     { path: '/dashboard', label: 'Dashboard' },
     { path: '/disease-info', label: 'Disease Info' },
     { path: '/about', label: 'About' },
+    
+    
   ];
 
   const handleMenuOpen = (event) => {
