@@ -99,7 +99,7 @@ const AboutPage = () => {
                   { name: 'Dennis Kofi Nsiah', role: 'Machine learning Specialist', contact: 'research@gmail.com' },
                   { name: 'Obed Sarkodie', role: 'Software Engineer', contact: 'medical@gmail.com' },
                   { name: 'Thomas Kangah', role: 'Business Development Specialist', contact: 'business@gmail.com' },
-                  { name: 'Geraldine Essilfu Enu', role: 'Lab Technicians', contact: 'lahtech@gmail.com' },
+                  { name: 'Geraldine Essilfu Enu', role: 'Lab Technicians', contact: 'labtech@gmail.com' },
                   
                 ].map((member) => (
                   <Grid item xs={12} sm={6} md={4} key={member.name}>
