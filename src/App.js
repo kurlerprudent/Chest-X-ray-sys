@@ -5,12 +5,17 @@ import UploadPage from './pages/UploadPage';
 import PredictionHistory from './pages/PredictionHistory';
 import DiseaseInfoPage from './pages/DiseaseInfoPage';
 import AboutPage from './pages/AboutPage';
+import { PredictionProvider } from './context/PredictionContext';
+
+
 
 import MyThemeProvider from './MyThemeProvider';
 
 function App() {
   return (
+    <PredictionProvider>
     <MyThemeProvider>
+     
       <Router>
         <Navbar />
         <Routes>
@@ -20,7 +25,9 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
         </Routes>
       </Router>
+ 
     </MyThemeProvider>
+    </PredictionProvider>
   );
 }
 

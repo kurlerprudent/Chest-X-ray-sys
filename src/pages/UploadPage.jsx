@@ -1,10 +1,11 @@
+// UploadPage.js
 import React, { useState, useRef } from 'react';
 import { Container, Typography, Button, Box, Tabs, Tab } from '@mui/material';
 import Dropzone from 'react-dropzone';
 import ReactWebcam from 'react-webcam';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt, faCheckCircle, faCamera, faUpload } from '@fortawesome/free-solid-svg-icons';
-import axiosInstance from '../api/axiosInstance';
+import { usePredictions } from '../context/PredictionContext';
 import './UploadPage.css';
 
 const UploadPage = () => {
@@ -14,11 +15,11 @@ const UploadPage = () => {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
   const webcamRef = useRef(null);
+  const { addPrediction } = usePredictions();
 
   // Toggle between upload and scan modes.
   const handleModeChange = (event, newValue) => {
     setMode(newValue);
-    // Clear previous image, file, and prediction when switching modes.
     setUploadedImage(null);
     setFile(null);
     setPrediction(null);
@@ -46,31 +47,51 @@ const UploadPage = () => {
     setPrediction(null);
   };
 
-  // Helper function to convert base64 to a File object.
+  // Helper: Convert base64 to a File object.
   const dataURLtoFile = (dataurl, filename) => {
     if (!dataurl) return null;
     let arr = dataurl.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
     return new File([u8arr], filename, { type: mime });
   };
 
-  // Trigger the API call to analyze the image.
+  // Simulate the prediction logic.
+  const simulatePrediction = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const diseases = ['Pneumonia', 'Tuberculosis', 'COVID-19'];
+        const diseaseDetected = Math.random() > 0.5;
+        const diseaseType = diseaseDetected ? diseases[Math.floor(Math.random() * diseases.length)] : null;
+        const info = diseaseDetected
+          ? `The analysis suggests a possibility of ${diseaseType}. Follow-up tests are advised.`
+          : 'No significant abnormalities detected.';
+        const confidence = Math.floor(Math.random() * 21) + 80;
+        resolve({
+          diseaseDetected,
+          diseaseType,
+          info,
+          confidence,
+          timestamp: new Date().toISOString(),
+          inferenceTime: (Math.random() * 0.5 + 1).toFixed(2) // simulated time between 1 and 1.5 seconds
+        });
+      }, 1000); // simulate a 1 second delay
+    });
+  };
+
+  // Trigger the prediction simulation.
   const handleAnalyze = async () => {
     if (!file) return;
     setLoading(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const response = await axiosInstance.post('/predict', formData);
-      // Expected API response structure:
-      // { diseaseDetected: true/false, diseaseType: "Pneumonia", info: "...", confidence: 87 }
-      setPrediction(response.data);
+      const predictionResult = await simulatePrediction();
+      setPrediction(predictionResult);
+      addPrediction(predictionResult); // update global prediction history
     } catch (error) {
       console.error("Error during prediction:", error);
       setPrediction({ error: 'Failed to analyze image' });
@@ -78,7 +99,7 @@ const UploadPage = () => {
     setLoading(false);
   };
 
-  // Download report after prediction.
+  // Download report.
   const downloadReport = () => {
     if (!prediction) return;
     const reportContent = `
@@ -217,7 +238,7 @@ Confidence: ${prediction.confidence}%
                         {prediction.info}
                       </Typography>
                       <Typography variant="body2">
-                        Confidence: {prediction.confidence}%
+                        Confidence: {prediction.confidence}% | Inference Time: {prediction.inferenceTime}s
                       </Typography>
                     </>
                   )}

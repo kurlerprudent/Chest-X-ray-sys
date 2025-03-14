@@ -1,9 +1,16 @@
+// src/pages/PredictionHistory.jsx
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, LinearProgress, Box, Button } from '@mui/material';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Area } from 'recharts';
+import { 
+  Container, Typography, Table, TableBody, TableCell, TableContainer, 
+  TableHead, TableRow, Paper, LinearProgress, Box, Button, Fab, Dialog, 
+  DialogTitle, DialogContent, DialogActions, IconButton, TextField, List, ListItem, ListItemText 
+} from '@mui/material';
+import { 
+  LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Area 
+} from 'recharts';
 import { styled } from '@mui/system';
+import { TrendingUp, History, InsertChart, Chat as ChatIcon, Close as CloseIcon } from '@mui/icons-material';
 import axiosInstance from '../api/axiosInstance';
-import { TrendingUp, History, InsertChart } from '@mui/icons-material';
 import './PredictionHistory.css';
 
 const GradientText = styled(Typography)(({ theme }) => ({
@@ -23,7 +30,13 @@ const PredictionHistory = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Chat-related states
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatInput, setChatInput] = useState("");
+
   useEffect(() => {
+    // If you have a backend endpoint, otherwise you can simulate data here.
     axiosInstance.get('/prediction-history')
       .then(response => {
         setHistory(response.data);
@@ -63,6 +76,26 @@ const PredictionHistory = () => {
     document.body.removeChild(link);
   };
 
+  // Chat handlers
+  const handleChatOpen = () => {
+    setChatOpen(true);
+  };
+
+  const handleChatClose = () => {
+    setChatOpen(false);
+  };
+
+  const handleChatSend = () => {
+    if (!chatInput.trim()) return;
+    // Add the user's message
+    setChatMessages(prev => [...prev, { sender: 'user', text: chatInput }]);
+    // Simulate a bot response after a delay
+    setTimeout(() => {
+      setChatMessages(prev => [...prev, { sender: 'bot', text: "Thanks for reaching out! How can I help?" }]);
+    }, 500);
+    setChatInput("");
+  };
+
   return (
     <div className="history-page">
       <div className="floating-dots">
@@ -80,6 +113,7 @@ const PredictionHistory = () => {
           </Typography>
         </Box>
 
+        {/* Chart Section */}
         <Paper className="chart-container">
           <Box className="chart-header">
             <TrendingUp className="chart-icon" />
@@ -120,6 +154,7 @@ const PredictionHistory = () => {
           </ResponsiveContainer>
         </Paper>
 
+        {/* Table Section */}
         <Paper className="table-container">
           <Box className="table-header">
             <History className="table-icon" />
@@ -170,6 +205,62 @@ const PredictionHistory = () => {
           </Box>
         </Paper>
       </Container>
+
+      {/* Floating Chat FAB */}
+      <Fab 
+        color="primary" 
+        aria-label="chat" 
+        onClick={handleChatOpen}
+        style={{ position: 'fixed', bottom: 20, right: 20 }}
+      >
+        <ChatIcon />
+      </Fab>
+
+      {/* Chat Dialog */}
+      <Dialog open={chatOpen} onClose={handleChatClose} fullWidth maxWidth="sm">
+        <DialogTitle>
+          Chat Support
+          <IconButton
+            aria-label="close"
+            onClick={handleChatClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers style={{ maxHeight: '300px' }}>
+          <List>
+            {chatMessages.map((msg, idx) => (
+              <ListItem key={idx} style={{ textAlign: msg.sender === 'user' ? 'right' : 'left' }}>
+                <ListItemText 
+                  primary={msg.text} 
+                  secondary={msg.sender === 'user' ? 'You' : 'Support'} 
+                />
+              </ListItem>
+            ))}
+          </List>
+        </DialogContent>
+        <DialogActions>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Type your message..."
+            fullWidth
+            variant="outlined"
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            onKeyDown={(e) => { if(e.key === 'Enter') handleChatSend(); }}
+          />
+          <Button onClick={handleChatSend} color="primary" variant="contained">
+            Send
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
