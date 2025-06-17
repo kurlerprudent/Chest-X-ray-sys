@@ -66,7 +66,7 @@ const Navbar = () => {
             WebkitTextFillColor: 'transparent',
           }}
         >
-         HealthTech 4 Africa
+        NASB
         </Typography>
 
         {isMobile ? (

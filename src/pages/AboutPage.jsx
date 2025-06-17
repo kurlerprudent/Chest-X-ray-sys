@@ -32,7 +32,7 @@ const AboutPage = () => {
       
       <Container maxWidth="lg" className="about-container">
         <GradientText variant="h2" align="center" gutterBottom className="main-title">
-          About HealthTech 4 Africa
+          About NASB
         </GradientText>
         
         <StyledPaper elevation={0} className="content-paper">
@@ -96,10 +96,10 @@ const AboutPage = () => {
               </Box>
               <Grid container spacing={3} justifyContent="center">
                 {[
-                  { name: 'Dennis Kofi Nsiah', role: 'Machine learning Specialist', contact: 'research@gmail.com' },
-                  { name: 'Obed Sarkodie', role: 'Software Engineer', contact: 'medical@gmail.com' },
-                  { name: 'Thomas Kangah', role: 'Business Development Specialist', contact: 'business@gmail.com' },
-                  { name: 'Geraldine Essilfu Enu', role: 'Lab Technicians', contact: 'labtech@gmail.com' },
+                  { name: 'Dennis Kofi Nsiah', role: 'Machine learning Specialist', contact: 'nsiahkofidennis001@gmail.com' },
+                  { name: 'Obed Sarkodie', role: 'Software Engineer', contact: 'sarkodie@gmail.com' },
+                  { name: 'Bawah Josephus', role: 'Business Development Specialisedicalt', contact: 'jbawah002@st.ug.edu.gh' },
+                  { name: 'Angela Aquah', role: 'Lab Technicians', contact: 'angelateteiba11@gmail.com' },
                   
                 ].map((member) => (
                   <Grid item xs={12} sm={6} md={4} key={member.name}>
